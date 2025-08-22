@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <template id="card-template">
+      <div class="card">
+        <div class="symbol symbol-up"></div>
+        <div class="value"></div>
+        <div class="symbol symbol-down"></div>
+      </div>
+    </template>
+
     <div class="game-table screen">
       <div class="dealer-area">
         <h2>Dealer: <span id="dealerCardScore">0</span></h2>
@@ -16,7 +24,7 @@
       <div class="info-area">
         <p id="game-message">Declare bet to start</p>
         <div class="bet-amount">
-          Current bet:
+          Current bet
           <span id="currentBet">0</span>
           $
         </div>
@@ -24,7 +32,13 @@
 
       <div class="player-area">
         <h2>Player: <span id="playerCardScore">0</span></h2>
-        <div id="player-hand" class="hand"></div>
+        <div id="player-hand" class="hand">
+          <div class="card kier">
+            <div class="symbol symbol-up">♠</div>
+            <div class="value">A</div>
+            <div class="symbol symbol-down">♠</div>
+          </div>
+        </div>
       </div>
 
       <div class="game-controls-area">

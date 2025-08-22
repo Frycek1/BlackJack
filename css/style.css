@@ -47,23 +47,6 @@ h2 {
   text-shadow: 1px 1px 2px black;
 }
 
-/* --- Przykładowy wygląd karty (do wypełnienia przez JS) --- */
-.card {
-  width: 80px;
-  height: 110px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 8px;
-  color: black;
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* --- Środkowy obszar z informacjami --- */
 .info-area {
   text-align: center;
 }
@@ -74,10 +57,9 @@ h2 {
 }
 .bet-display {
   font-size: 1.1rem;
-  color: #ffd700; /* Złoty kolor */
+  color: #ffd700;
 }
 
-/* --- Panel kontrolny na dole --- */
 .controls-area {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1rem;
@@ -98,7 +80,77 @@ h2 {
   font-size: 1.2rem;
 }
 
-/* --- Przyciski --- */
+.card {
+  box-sizing: border-box;
+  width: 10%;
+  height: auto;
+  aspect-ratio: 5/7;
+
+  align-self: center;
+
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+  position: relative;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.value {
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.symbol {
+  position: absolute;
+  font-size: 24px;
+}
+
+.symbol-up {
+  top: 5px;
+  left: 10px;
+}
+
+.symbol-down {
+  bottom: 5px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+.kier {
+  color: red;
+}
+.karo {
+  color: red;
+}
+.pik {
+  color: black;
+}
+.trefl {
+  color: black;
+}
+
+.card.face-down {
+  background-color: #8d0606;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.2),
+    rgba(0, 0, 0, 0.2) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+}
+
+.face-down .value,
+.face-down .symbol {
+  display: none;
+}
+
 .chip-button,
 .action-button {
   padding: 10px 20px;
