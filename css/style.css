@@ -1,0 +1,148 @@
+body {
+  font-family: sans-serif;
+  background-image: url("/Images/Background.jpg");
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.board {
+  background-color: darkgreen;
+}
+.game-table {
+  width: 90vw;
+  max-width: 900px;
+  aspect-ratio: 3 / 2;
+  background-color: #006400;
+  border: 15px solid #5c3317;
+  border-radius: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* --- Strefy gracza i krupiera --- */
+.dealer-area,
+.player-area {
+  height: 35%;
+}
+
+.hand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  min-height: 120px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 0 10px 0;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* --- Przykładowy wygląd karty (do wypełnienia przez JS) --- */
+.card {
+  width: 80px;
+  height: 110px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 8px;
+  color: black;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Środkowy obszar z informacjami --- */
+.info-area {
+  text-align: center;
+}
+#game-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 25px;
+}
+.bet-display {
+  font-size: 1.1rem;
+  color: #ffd700; /* Złoty kolor */
+}
+
+/* --- Panel kontrolny na dole --- */
+.controls-area {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 0 0 120px 120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.game-controls-area {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.player-wallet {
+  font-size: 1.2rem;
+}
+
+/* --- Przyciski --- */
+.chip-button,
+.action-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.chip-button {
+  background-color: #d32f2f;
+  color: white;
+}
+.chip-button:hover {
+  background-color: #f44336;
+  transform: scale(1.05);
+}
+
+.action-button {
+  background-color: #fdd835;
+  color: #333;
+}
+.action-button:hover {
+  background-color: #ffeb3b;
+  transform: scale(1.05);
+}
+
+.locked {
+  background-color: #5a6268; /* Ciemniejszy, szary kolor tła */
+  color: #a0a0a0; /* Jaśniejszy, szary kolor tekstu */
+  cursor: not-allowed; /* Kursor "zakazu" */
+  box-shadow: none; /* Usunięcie cienia, aby wyglądał płasko */
+  border-color: #444; /* Ciemniejsza ramka */
+}
+
+/* WAŻNE: Wyłącz efekty po najechaniu dla zablokowanych przycisków */
+.action-button.locked:hover,
+.chip-button.locked:hover {
+  background-color: #5a6268; /* Kolor tła pozostaje bez zmian */
+  transform: none; /* Brak efektu powiększenia */
+}
+
+.hidden {
+  display: none !important;
+}

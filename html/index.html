@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackjack Simulator</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="game-table screen">
+      <div class="dealer-area">
+        <h2>Dealer: <span id="dealerCardScore">0</span></h2>
+        <div id="dealer-hand" class="hand"></div>
+      </div>
+
+      <div class="info-area">
+        <p id="game-message">Declare bet to start</p>
+        <div class="bet-amount">
+          Current bet:
+          <span id="currentBet">0</span>
+          $
+        </div>
+      </div>
+
+      <div class="player-area">
+        <h2>Player: <span id="playerCardScore">0</span></h2>
+        <div id="player-hand" class="hand"></div>
+      </div>
+
+      <div class="game-controls-area">
+        <div id="game-controls" class="hidden">
+          <button id="hit-button" class="action-button">Hit</button>
+          <button id="stand-button" class="action-button">Stand</button>
+        </div>
+      </div>
+
+      <div class="controls-area">
+        <div class="player-wallet">
+          Money: <span id="playerMoney">1000</span>$
+        </div>
+
+        <div id="betting-controls">
+          <button id="reset-chip-button" class="action-button">reset</button>
+          <button class="chip-button" data-bet="10">10$</button>
+          <button class="chip-button" data-bet="50">50$</button>
+          <button class="chip-button" data-bet="100">100$</button>
+          <button id="deal-button" class="action-button">deal</button>
+        </div>
+      </div>
+    </div>
+    <script src="/js/script.js"></script>
+  </body>
+</html>
