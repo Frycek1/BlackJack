@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-image: url("/Images/Background.jpg");
+  background-image: url(".Images/Background.jpg");
   color: #eee;
   display: flex;
   justify-content: center;
