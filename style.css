@@ -1,3 +1,7 @@
+/* =========================================== */
+/* === WERSJA W PEŁNI PŁYNNA I RESPONSYWNA === */
+/* =========================================== */
+
 body {
   font-family: sans-serif;
   background-image: url("./Images/Background.jpg");
@@ -7,22 +11,24 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  overflow: hidden; /* Zapobiega pojawianiu się pasków przewijania */
 }
 
-.board {
-  background-color: darkgreen;
-}
 .game-table {
   width: 90vw;
-  max-width: 900px;
-  aspect-ratio: 3 / 2;
+  max-width: 1300px;
+  aspect-ratio: 16 / 9; /* Domyślnie proporcje szerokiego ekranu */
   background-color: #006400;
-  border: 15px solid #5c3317;
-  border-radius: 150px;
+  /* Użycie clamp() dla płynnego skalowania */
+  border-width: clamp(10px, 1.5vw, 20px);
+  border-style: solid;
+  border-color: #5c3317;
+  border-radius: clamp(50px, 8vw, 150px);
+  padding: clamp(1rem, 2.5vw, 2.5rem);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 2rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
 }
@@ -35,102 +41,96 @@ body {
 
 .hand {
   display: flex;
+  flex-wrap: wrap; /* Zawsze włączone zawijanie */
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  min-height: 120px;
+  align-content: center;
+  gap: clamp(5px, 1vw, 15px);
+  min-height: clamp(100px, 15vh, 180px); /* Płynna minimalna wysokość */
 }
 
 h2 {
   text-align: center;
   margin: 0 0 10px 0;
   text-shadow: 1px 1px 2px black;
+  font-size: clamp(1.1rem, 2vw, 1.8rem);
 }
 
 .info-area {
   text-align: center;
 }
 #game-message {
-  font-size: 1.2rem;
   font-weight: bold;
   min-height: 25px;
+  font-size: clamp(1rem, 1.5vw, 1.4rem);
 }
 .bet-display {
-  font-size: 1.1rem;
   color: #ffd700;
+  font-size: clamp(0.9rem, 1.3vw, 1.3rem);
+}
+
+.controls-area,
+.game-controls-area {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; /* Zawsze włączone zawijanie */
+  gap: clamp(8px, 1.2vw, 15px);
 }
 
 .controls-area {
   background-color: rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  border-radius: 0 0 120px 120px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.game-controls-area {
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  border-radius: 0 0 clamp(40px, 7vw, 120px) clamp(40px, 7vw, 120px);
 }
 
 .player-wallet {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
 }
 
 .card {
   box-sizing: border-box;
-  width: 10%;
-  height: auto;
-  aspect-ratio: 5/7;
-
-  align-self: center;
-
+  width: clamp(60px, 8vw, 110px); /* Płynna szerokość karty */
+  aspect-ratio: 5 / 7;
   border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 5px;
+  border-radius: clamp(5px, 0.8vw, 10px);
+  padding: clamp(4px, 1vw, 10px);
   position: relative;
   background-color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: black;
 }
 
 .value {
-  font-size: 48px;
   font-weight: bold;
   line-height: 1;
+  font-size: clamp(20px, 4vw, 52px); /* Płynna czcionka wartości */
 }
 
 .symbol {
   position: absolute;
-  font-size: 24px;
+  font-size: clamp(12px, 2.2vw, 28px); /* Płynna czcionka symbolu */
 }
 
 .symbol-up {
-  top: 5px;
-  left: 10px;
+  top: clamp(3px, 0.5vw, 8px);
+  left: clamp(4px, 0.8vw, 10px);
 }
 
 .symbol-down {
-  bottom: 5px;
-  right: 10px;
+  bottom: clamp(3px, 0.5vw, 8px);
+  right: clamp(4px, 0.8vw, 10px);
   transform: rotate(180deg);
 }
 
-.kier {
-  color: red;
-}
+.kier,
 .karo {
   color: red;
 }
-.pik {
-  color: black;
-}
+.pik,
 .trefl {
   color: black;
 }
@@ -153,11 +153,11 @@ h2 {
 
 .chip-button,
 .action-button {
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: clamp(8px, 1.5vh, 12px) clamp(15px, 2.5vw, 25px); /* Płynny padding */
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem); /* Płynna czcionka */
   font-weight: bold;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 30px; /* Stały promień wygląda dobrze na przyciskach */
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
 }
@@ -170,7 +170,6 @@ h2 {
   background-color: #f44336;
   transform: scale(1.05);
 }
-
 .action-button {
   background-color: #fdd835;
   color: #333;
@@ -181,20 +180,26 @@ h2 {
 }
 
 .locked {
-  background-color: #5a6268; /* Ciemniejszy, szary kolor tła */
-  color: #a0a0a0; /* Jaśniejszy, szary kolor tekstu */
-  cursor: not-allowed; /* Kursor "zakazu" */
-  box-shadow: none; /* Usunięcie cienia, aby wyglądał płasko */
-  border-color: #444; /* Ciemniejsza ramka */
+  background-color: #5a6268;
+  color: #a0a0a0;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: #444;
 }
 
-/* WAŻNE: Wyłącz efekty po najechaniu dla zablokowanych przycisków */
 .action-button.locked:hover,
 .chip-button.locked:hover {
-  background-color: #5a6268; /* Kolor tła pozostaje bez zmian */
-  transform: none; /* Brak efektu powiększenia */
+  background-color: #5a6268;
+  transform: none;
 }
 
 .hidden {
   display: none !important;
+}
+
+/* MEDIA QUERY DO ZMIANY GŁÓWNEJ STRUKTURY NA EKRANACH PIONOWYCH */
+@media (max-aspect-ratio: 1/1) {
+  .game-table {
+    aspect-ratio: 9 / 16; /* Proporcje pionowe */
+  }
 }
