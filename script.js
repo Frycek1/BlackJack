@@ -3,17 +3,11 @@ const resetChipButton = document.getElementById("reset-chip-button");
 const playerHandContainer = document.getElementById("player-hand");
 const dealerHandContainer = document.getElementById("dealer-hand");
 const dealButton = document.getElementById("deal-button");
-
-let playerHand = new Array();
-let dealerHand = new Array();
-let deck = new Array();
-
-const gameState = {
-  playerMoney: 1000,
-  currentBet: 0,
-  playerCardScore: 0,
-  dealerCardScore: 0,
-};
+const hitButton = document.getElementById("hit-button");
+const standButton = document.getElementById("stand-button");
+const bettingControls = document.getElementById("betting-controls");
+const gameControls = document.getElementById("game-controls");
+const gameMessage = document.getElementById("game-message");
 
 const CardSymbol = Object.freeze({
   KIER: Symbol("kier"),
@@ -21,6 +15,26 @@ const CardSymbol = Object.freeze({
   PIK: Symbol("pik"),
   TREFL: Symbol("trefl"),
 });
+
+const GAME_PHASE = Object.freeze({
+  BETTING: "BETTING",
+  PLAYER_TURN: "PLAYER_TURN",
+  DEALER_TURN: "DEALER_TURN",
+  ROUND_OVER: "ROUND_OVER",
+});
+
+let playerHand = [];
+let dealerHand = [];
+let deck = [];
+
+const gameState = {
+  playerMoney: 1000,
+  currentBet: 0,
+  playerCardScore: 0,
+  dealerCardScore: 0,
+  currentPhase: GAME_PHASE.BETTING,
+};
+
 class Card {
   constructor(value, symbol, facedown) {
     if (typeof value !== "number" || value < 1 || value > 13) {
