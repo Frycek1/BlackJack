@@ -190,27 +190,36 @@ function dealerPlays() {
     }
   }, 1000);
 }
-    case 1:
-      value = "A";
-      break;
-    case 11:
-      value = "J";
-      break;
-    case 12:
-      value = "Q";
-      break;
-    case 13:
-      value = "K";
-      break;
-  }
-  valueElement.textContent = value;
 
-  let cardSymbol = "";
-  let colorClass = "";
-  switch (card.symbol) {
-    case CardSymbol.KIER:
-      cardSymbol = "♥";
-      colorClass = "kier";
+function prepareDeck(deck, numberOfDecks) {
+  for (let i = 0; i < numberOfDecks; i++) {
+    for (let j = 0; j < 52; j++) {
+      let cardSymbol;
+      switch (Math.trunc(j / 13)) {
+        case 0:
+          cardSymbol = CardSymbol.KIER;
+          break;
+    case 1:
+          cardSymbol = CardSymbol.KARO;
+      break;
+        case 2:
+          cardSymbol = CardSymbol.PIK;
+      break;
+        case 3:
+          cardSymbol = CardSymbol.TREFL;
+      break;
+      }
+      deck.push(new Card((j % 13) + 1, cardSymbol, false));
+  }
+  }
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
       break;
     case CardSymbol.KARO:
       cardSymbol = "♦";
