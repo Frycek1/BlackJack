@@ -71,12 +71,81 @@ const handler = {
 
 const game = new Proxy(gameState, handler);
 
-function addToBet(button) {
-  const betValueNumber = parseInt(button.dataset.bet, 10);
+function dealRound() {
+  if (game.currentBet === 0) return;
 
-  if (betValueNumber > game.playerMoney) return;
-  game.currentBet += betValueNumber;
-  game.playerMoney -= betValueNumber;
+  clearRound();
+  calculateScores();
+  prepareDeck(deck, 6);
+  shuffle(deck);
+
+  playerHand.push(deck.pop());
+  playerHand.push(deck.pop());
+  dealerHand.push(deck.pop());
+  dealerHand.push(deck.pop());
+
+  showPlayerHand();
+  dealerHand[0].facedown = true;
+  showDealerHand();
+  calculateScores();
+
+  const playerHasBlackjack = game.playerCardScore === 21;
+  const dealerRealScore =
+    (dealerHand[0].value > 9
+      ? 10
+      : dealerHand[0].value === 1
+      ? 11
+      : dealerHand[0].value) +
+    (dealerHand[1].value > 9
+      ? 10
+      : dealerHand[1].value === 1
+      ? 11
+      : dealerHand[1].value);
+  const dealerHasBlackjack = dealerRealScore === 21;
+
+  if (playerHasBlackjack) {
+    if (dealerHasBlackjack) {
+      draw();
+    } else {
+      playerWins(1.5);
+    }
+  } else if (dealerHasBlackjack) {
+    revealDealerCard();
+    playerLoses();
+  } else {
+    game.currentPhase = GAME_PHASE.PLAYER_TURN;
+  }
+}
+
+function resolveRound() {
+  if (game.dealerCardScore > 21) {
+    playerWins();
+  } else if (game.playerCardScore > game.dealerCardScore) {
+    playerWins();
+  } else if (game.dealerCardScore > game.playerCardScore) {
+    playerLoses();
+  } else {
+    draw();
+  }
+}
+
+function playerWins(payoutRatio = 1) {
+  const winnings = Math.ceil(game.currentBet * payoutRatio);
+  game.playerMoney += game.currentBet + winnings;
+  game.currentPhase = GAME_PHASE.ROUND_OVER;
+  gameMessage.textContent = "You Won!";
+}
+
+function playerLoses() {
+  game.currentPhase = GAME_PHASE.ROUND_OVER;
+  gameMessage.textContent = "You Lost!";
+}
+
+function draw() {
+  game.playerMoney += game.currentBet;
+  game.currentPhase = GAME_PHASE.ROUND_OVER;
+  gameMessage.textContent = "Draw!";
+}
 }
 
 function resetChips() {
