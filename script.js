@@ -396,12 +396,29 @@ function revealDealerCard() {
 
 chipButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    addToBet(button);
+    if (game.currentPhase === GAME_PHASE.BETTING) {
+      addToBet(parseInt(button.dataset.bet, 10));
+    }
   });
 });
+
 resetChipButton.addEventListener("click", () => {
+  if (game.currentPhase === GAME_PHASE.BETTING) {
   resetChips();
+  }
 });
+
 dealButton.addEventListener("click", () => {
+  if (dealButton.classList.contains("locked")) return;
+
+  if (game.currentPhase === GAME_PHASE.BETTING) {
   dealRound();
+  } else if (game.currentPhase === GAME_PHASE.ROUND_OVER) {
+    game.currentBet = 0;
+    clearRound();
+    game.currentPhase = GAME_PHASE.BETTING;
+  }
 });
+
+hitButton.addEventListener("click", playerHit);
+standButton.addEventListener("click", playerStand);
