@@ -220,37 +220,52 @@ function shuffle(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
+
+function updateUI() {
+  switch (game.currentPhase) {
+    case GAME_PHASE.BETTING:
+      bettingControls.classList.remove("hidden");
+      gameControls.classList.add("hidden");
+
+      chipButtons.forEach((btn) => btn.classList.remove("locked"));
+      resetChipButton.classList.remove("locked");
+
+      dealButton.textContent = "Deal";
+      if (game.currentBet === 0) {
+        dealButton.classList.add("locked");
+      } else {
+        dealButton.classList.remove("locked");
+}
       break;
-    case CardSymbol.KARO:
-      cardSymbol = "♦";
-      colorClass = "karo";
+
+    case GAME_PHASE.PLAYER_TURN:
+      bettingControls.classList.add("hidden");
+      gameControls.classList.remove("hidden");
+
+      hitButton.classList.remove("locked");
+      standButton.classList.remove("locked");
       break;
-    case CardSymbol.PIK:
-      cardSymbol = "♠";
-      colorClass = "pik";
+
+    case GAME_PHASE.DEALER_TURN:
+      bettingControls.classList.add("hidden");
+      gameControls.classList.remove("hidden");
+      hitButton.classList.add("locked");
+      standButton.classList.add("locked");
       break;
-    case CardSymbol.TREFL:
-      cardSymbol = "♣";
-      colorClass = "trefl";
+
+    case GAME_PHASE.ROUND_OVER:
+      bettingControls.classList.remove("hidden");
+      gameControls.classList.add("hidden");
+
+      chipButtons.forEach((btn) => btn.classList.add("locked"));
+      resetChipButton.classList.add("locked");
+
+      dealButton.textContent = "New Round";
+      dealButton.classList.remove("locked");
       break;
   }
-
-  symbolUpElement.textContent = cardSymbol;
-  symbolDownElement.textContent = cardSymbol;
-
-  cardElement.classList.add(colorClass);
-  if (card.facedown === true) {
-    cardElement.classList.add("face-down");
-  }
-
-  destinationContainer.appendChild(cardClone);
 }
-function clearPlayerHand() {
-  playerHandContainer.innerHTML = "";
-}
-function clearDealerHand() {
-  dealerHandContainer.innerHTML = "";
-}
+
 function calculateScores() {
   let playerCardScore = 0;
   let dealerCardScore = 0;
@@ -295,65 +310,87 @@ function calculateScores() {
   game.dealerCardScore = dealerCardScore;
 }
 
-function prepareDeck(deck, numberOfDecks) {
-  let cardSymbol;
-  for (i = 0; i < numberOfDecks; i++) {
-    for (j = 0; j < 52; j++) {
-      switch (Math.trunc(j / 13)) {
-        case 0:
-          cardSymbol = CardSymbol.KIER;
+function showCard(card, destinationContainer) {
+  const template = document.getElementById("card-template");
+  const cardClone = template.content.cloneNode(true);
+  const valueElement = cardClone.querySelector(".value");
+  const symbolUpElement = cardClone.querySelector(".symbol-up");
+  const symbolDownElement = cardClone.querySelector(".symbol-down");
+  const cardElement = cardClone.querySelector(".card");
+  let value = card.value;
+  switch (card.value) {
+    case 1:
+      value = "A";
           break;
-        case 1:
-          cardSymbol = CardSymbol.KARO;
+    case 11:
+      value = "J";
           break;
-        case 2:
-          cardSymbol = CardSymbol.PIK;
+    case 12:
+      value = "Q";
           break;
-        case 3:
-          cardSymbol = CardSymbol.TREFL;
+    case 13:
+      value = "K";
           break;
       }
-      deck.push(new Card((j % 13) + 1, cardSymbol, false));
-    }
+  valueElement.textContent = value;
+  let cardSymbol = "";
+  let colorClass = "";
+  switch (card.symbol) {
+    case CardSymbol.KIER:
+      cardSymbol = "♥";
+      colorClass = "kier";
+      break;
+    case CardSymbol.KARO:
+      cardSymbol = "♦";
+      colorClass = "karo";
+      break;
+    case CardSymbol.PIK:
+      cardSymbol = "♠";
+      colorClass = "pik";
+      break;
+    case CardSymbol.TREFL:
+      cardSymbol = "♣";
+      colorClass = "trefl";
+      break;
   }
-}
-
-function shuffle(array) {
-  let currentIndex = array.length;
-
-  while (currentIndex != 0) {
-    let randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
+  symbolUpElement.textContent = cardSymbol;
+  symbolDownElement.textContent = cardSymbol;
+  cardElement.classList.add(colorClass);
+  if (card.facedown === true) {
+    cardElement.classList.add("face-down");
   }
+  destinationContainer.appendChild(cardClone);
 }
 
 function clearRound() {
-  playerHand = new Array();
-  dealerHand = new Array();
-  deck = new Array();
+  playerHand = [];
+  dealerHand = [];
+  deck = [];
   clearDealerHand();
   clearPlayerHand();
 }
 
-function dealRound() {
-  clearRound();
-  prepareDeck(deck, 6);
-  shuffle(deck);
-  playerHand.push(deck.pop());
-  playerHand.push(deck.pop());
-  dealerHand.push(deck.pop());
-  dealerHand.push(deck.pop());
-  playerHand.forEach((element) => {
-    showCard(element, playerHandContainer);
-  });
-  dealerHand[0].facedown = true;
-  showCard(dealerHand[0], dealerHandContainer);
-  showCard(dealerHand[1], dealerHandContainer);
+function clearPlayerHand() {
+  playerHandContainer.innerHTML = "";
+}
+
+function clearDealerHand() {
+  dealerHandContainer.innerHTML = "";
+}
+
+function showPlayerHand() {
+  clearPlayerHand();
+  playerHand.forEach((element) => showCard(element, playerHandContainer));
+}
+
+function showDealerHand() {
+  clearDealerHand();
+  dealerHand.forEach((element) => showCard(element, dealerHandContainer));
+}
+
+function revealDealerCard() {
+  dealerHand[0].facedown = false;
+  showDealerHand();
   calculateScores();
 }
 
