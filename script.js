@@ -56,12 +56,14 @@ const handler = {
   get: function (target, property) {
     return target[property];
   },
-
   set: function (target, property, value) {
     target[property] = value;
     const elementToUpdate = document.getElementById(property);
     if (elementToUpdate) {
       elementToUpdate.textContent = value;
+    }
+    if (property === "currentPhase") {
+      updateUI();
     }
     return true;
   },
