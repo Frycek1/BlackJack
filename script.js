@@ -146,6 +146,7 @@ function draw() {
   game.currentPhase = GAME_PHASE.ROUND_OVER;
   gameMessage.textContent = "Draw!";
 }
+
 function addToBet(value) {
   if (value > game.playerMoney) return;
   game.currentBet += value;
@@ -199,18 +200,18 @@ function prepareDeck(deck, numberOfDecks) {
         case 0:
           cardSymbol = CardSymbol.KIER;
           break;
-    case 1:
+        case 1:
           cardSymbol = CardSymbol.KARO;
-      break;
+          break;
         case 2:
           cardSymbol = CardSymbol.PIK;
-      break;
+          break;
         case 3:
           cardSymbol = CardSymbol.TREFL;
-      break;
+          break;
       }
       deck.push(new Card((j % 13) + 1, cardSymbol, false));
-  }
+    }
   }
 }
 
@@ -235,7 +236,7 @@ function updateUI() {
         dealButton.classList.add("locked");
       } else {
         dealButton.classList.remove("locked");
-}
+      }
       break;
 
     case GAME_PHASE.PLAYER_TURN:
@@ -321,17 +322,17 @@ function showCard(card, destinationContainer) {
   switch (card.value) {
     case 1:
       value = "A";
-          break;
+      break;
     case 11:
       value = "J";
-          break;
+      break;
     case 12:
       value = "Q";
-          break;
+      break;
     case 13:
       value = "K";
-          break;
-      }
+      break;
+  }
   valueElement.textContent = value;
   let cardSymbol = "";
   let colorClass = "";
@@ -404,7 +405,7 @@ chipButtons.forEach((button) => {
 
 resetChipButton.addEventListener("click", () => {
   if (game.currentPhase === GAME_PHASE.BETTING) {
-  resetChips();
+    resetChips();
   }
 });
 
@@ -412,7 +413,7 @@ dealButton.addEventListener("click", () => {
   if (dealButton.classList.contains("locked")) return;
 
   if (game.currentPhase === GAME_PHASE.BETTING) {
-  dealRound();
+    dealRound();
   } else if (game.currentPhase === GAME_PHASE.ROUND_OVER) {
     game.currentBet = 0;
     clearRound();
@@ -422,3 +423,5 @@ dealButton.addEventListener("click", () => {
 
 hitButton.addEventListener("click", playerHit);
 standButton.addEventListener("click", playerStand);
+
+updateUI();
