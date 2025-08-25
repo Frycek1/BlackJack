@@ -146,25 +146,50 @@ function draw() {
   game.currentPhase = GAME_PHASE.ROUND_OVER;
   gameMessage.textContent = "Draw!";
 }
+function addToBet(value) {
+  if (value > game.playerMoney) return;
+  game.currentBet += value;
+  game.playerMoney -= value;
+  updateUI();
 }
 
 function resetChips() {
   game.playerMoney += game.currentBet;
   game.currentBet = 0;
+  updateUI();
 }
 
-function showCard(card, destinationContainer) {
-  const template = document.getElementById("card-template");
+function playerHit() {
+  if (game.currentPhase !== GAME_PHASE.PLAYER_TURN) return;
+  playerHand.push(deck.pop());
+  showPlayerHand();
+  calculateScores();
 
-  const cardClone = template.content.cloneNode(true);
+  if (game.playerCardScore > 21) {
+    playerLoses();
+  }
+}
 
-  const valueElement = cardClone.querySelector(".value");
-  const symbolUpElement = cardClone.querySelector(".symbol-up");
-  const symbolDownElement = cardClone.querySelector(".symbol-down");
-  const cardElement = cardClone.querySelector(".card");
+function playerStand() {
+  if (game.currentPhase !== GAME_PHASE.PLAYER_TURN) return;
+  game.currentPhase = GAME_PHASE.DEALER_TURN;
+  dealerPlays();
+}
 
-  let value = card.value;
-  switch (card.value) {
+function dealerPlays() {
+  revealDealerCard();
+
+  const playInterval = setInterval(() => {
+    if (game.dealerCardScore < 17) {
+      dealerHand.push(deck.pop());
+      showDealerHand();
+      calculateScores();
+    } else {
+      clearInterval(playInterval);
+      resolveRound();
+    }
+  }, 1000);
+}
     case 1:
       value = "A";
       break;
