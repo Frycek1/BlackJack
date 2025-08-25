@@ -1,6 +1,3 @@
-/* =========================================== */
-/* === WERSJA W PEŁNI PŁYNNA I RESPONSYWNA === */
-/* =========================================== */
 
 body {
   font-family: sans-serif;
@@ -11,15 +8,14 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  overflow: hidden; /* Zapobiega pojawianiu się pasków przewijania */
+  overflow: hidden; 
 }
 
 .game-table {
   width: 90vw;
   max-width: 1300px;
-  aspect-ratio: 16 / 9; /* Domyślnie proporcje szerokiego ekranu */
+  aspect-ratio: 16 / 9; 
   background-color: #006400;
-  /* Użycie clamp() dla płynnego skalowania */
   border-width: clamp(10px, 1.5vw, 20px);
   border-style: solid;
   border-color: #5c3317;
@@ -33,7 +29,6 @@ body {
   box-sizing: border-box;
 }
 
-/* --- Strefy gracza i krupiera --- */
 .dealer-area,
 .player-area {
   height: 35%;
@@ -41,12 +36,12 @@ body {
 
 .hand {
   display: flex;
-  flex-wrap: wrap; /* Zawsze włączone zawijanie */
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   align-content: center;
   gap: clamp(5px, 1vw, 15px);
-  min-height: clamp(100px, 15vh, 180px); /* Płynna minimalna wysokość */
+  min-height: clamp(100px, 15vh, 180px); 
 }
 
 h2 {
@@ -74,8 +69,9 @@ h2 {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex-wrap: wrap; /* Zawsze włączone zawijanie */
+  flex-wrap: wrap;
   gap: clamp(8px, 1.2vw, 15px);
+  padding: clamp(0.5rem, 1.5vw, 1rem);
 }
 
 .controls-area {
@@ -90,7 +86,7 @@ h2 {
 
 .card {
   box-sizing: border-box;
-  width: clamp(60px, 8vw, 110px); /* Płynna szerokość karty */
+  width: clamp(60px, 8vw, 110px); 
   aspect-ratio: 5 / 7;
   border: 1px solid black;
   border-radius: clamp(5px, 0.8vw, 10px);
@@ -107,12 +103,12 @@ h2 {
 .value {
   font-weight: bold;
   line-height: 1;
-  font-size: clamp(20px, 4vw, 52px); /* Płynna czcionka wartości */
+  font-size: clamp(20px, 4vw, 52px); /
 }
 
 .symbol {
   position: absolute;
-  font-size: clamp(12px, 2.2vw, 28px); /* Płynna czcionka symbolu */
+  font-size: clamp(12px, 2.2vw, 28px); 
 }
 
 .symbol-up {
@@ -153,11 +149,11 @@ h2 {
 
 .chip-button,
 .action-button {
-  padding: clamp(8px, 1.5vh, 12px) clamp(15px, 2.5vw, 25px); /* Płynny padding */
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem); /* Płynna czcionka */
+  padding: clamp(8px, 1.5vh, 12px) clamp(15px, 2.5vw, 25px); 
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem); 
   font-weight: bold;
   border: 2px solid #ccc;
-  border-radius: 30px; /* Stały promień wygląda dobrze na przyciskach */
+  border-radius: 30px; 
   cursor: pointer;
   transition: background-color 0.2s, transform 0.2s;
 }
@@ -197,9 +193,8 @@ h2 {
   display: none !important;
 }
 
-/* MEDIA QUERY DO ZMIANY GŁÓWNEJ STRUKTURY NA EKRANACH PIONOWYCH */
 @media (max-aspect-ratio: 1/1) {
   .game-table {
-    aspect-ratio: 9 / 16; /* Proporcje pionowe */
+    aspect-ratio: 9 / 16;
   }
 }
