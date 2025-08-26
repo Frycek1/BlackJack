@@ -12,7 +12,7 @@ This project does not require any build process or installation. To run it, simp
 1.  Clone the repository: `git clone https://github.com/Frycek1/BlackJack.git`
 2.  Open the `index.html` file in any modern web browser.
 
-Or test it online at https://frycek1.github.io/BlacJack
+Or test it online at https://frycek1.github.io/BlackJack
 
 ---
 ## Features
