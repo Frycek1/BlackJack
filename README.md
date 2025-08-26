@@ -16,13 +16,13 @@ Or test it online at https://frycek1.github.io/BlacJack
 
 ---
 ## Features
-- [x] Betting system.
-- [x] Card dealing for the player and the dealer.
-- [x] Basic player actions: **Hit** and **Stand**.
-- [x] Dealer's turn logic (hits until 17).
-- [x] Automatic round resolution (win, lose, push).
-- [ ] **(In Progress)** Double Down mechanic.
-- [ ] **(In Progress)** Split mechanic.
+- Betting system.
+- Card dealing for the player and the dealer.
+- Basic player actions: **Hit** and **Stand**.
+- Dealer's turn logic (hits until 17).
+- Automatic round resolution (win, lose, push).
+- **(In Progress)** Double Down mechanic.
+- **(In Progress)** Split mechanic.
 
 ---
 ## Game Rules
