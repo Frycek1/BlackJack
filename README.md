@@ -1,5 +1,7 @@
 # BlackJack simulator in JavaScript
 Simple blackjack simulator written in html, javaScript and css.
+<img width="1550" height="929" alt="image" src="https://github.com/user-attachments/assets/aa97bf34-bbcf-4498-9c5a-3d6f9a3f8469" />
+<img width="1550" height="929" alt="image" src="https://github.com/user-attachments/assets/bf0170e7-70ba-47c0-91d3-34d0976792c5" />
 
 ## Table of Contents
 1. [Getting Started](#getting-started)
